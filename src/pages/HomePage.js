@@ -1,5 +1,7 @@
 import { usePosts } from "../context/postContext"
-import {vscEmptyWindow} from 'react-icons/vsc'
+import {VscEmptyWindow} from 'react-icons/vsc'
+import { Link } from "react-router-dom"
+import { postCard } from "../components/postCard"
 
 export function HomePage(){
 
@@ -7,7 +9,7 @@ export function HomePage(){
 
     if(posts.length == 0) return(
         <div className=" flex flex-col justify-center items-center">
-            <vscEmptyWindow className='w-48 h-48 text-white'/>
+            <VscEmptyWindow className='w-48 h-48 text-white'/>
             <h1 className="text-white text-2xl">No hay Publicaciones </h1>
         </div>
     )
@@ -15,12 +17,15 @@ export function HomePage(){
     
     
     return (
-        <div>
-            {posts.map(posts =>(
-                <div key={post._id}>
-                    {post.title}
-                </div>
+        <div className="text-white">
+            <Link to={"/new"}>Crear nuevo Post </Link>
+          <div className="grid grid-cols-3 gap-2">
+          {posts.map(posts =>(
+                //estos post no llevan la s cuando tenga el backen 
+               <postCard post={post} key={post._id}/>
             ))}
+          </div>
+           
         </div>
     )
 }
